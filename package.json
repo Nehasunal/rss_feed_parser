@@ -1,0 +1,19 @@
+{
+  "name": "rssparser",
+  "version": "1.0.0",
+  "description": "Parse xml feed",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Neha Sunal",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^3.1.0",
+    "xml2js": "^0.6.2"
+  }
+}
