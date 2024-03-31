@@ -5,7 +5,7 @@ const { parseString } = require('xml2js');
 exports.getRssFeed = async function(req, res) {
     try {
 
-        const { xmlLink } = req.body;
+        const xmlLink = req.query.url;
         // Fetch RSS feed
         const response = await fetch(xmlLink);
         const xml = await response.text();
@@ -34,6 +34,16 @@ exports.getRssFeed = async function(req, res) {
             filteredItems = items.filter(item => {
               return queryRegex.test(item.title[0]) || queryRegex.test(item.description[0]);
             });
+          }
+
+          if(req.query.startDate && req.query.endDate){
+          // Filter items based on published date range
+          const startDate = new Date(req.query.startDate);
+          const endDate = new Date(req.query.endDate);
+          filteredItems = filteredItems.filter(item => {
+              const publishedDate = new Date(item.pubDate[0]);
+              return publishedDate >= startDate && publishedDate <= endDate;
+          });
           }
     
           // Apply limit to the filtered items
